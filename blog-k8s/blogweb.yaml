@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: blogweb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: blogweb
+    spec: 
+      containers:
+        - name: blogweb
+          image: blogweb/images
+          ports: 
+          - containerPort: 8080
+          env:
+          - name: REDIS_SERVICE_HOST
+            value: 'redis-svc'
+          - name: REDIS_SERVICE_PORT
+            value: '6379'
+
